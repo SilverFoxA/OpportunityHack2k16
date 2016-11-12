@@ -67,7 +67,7 @@ public class ProfileEditActivity extends AppCompatActivity {
         if(item.getItemId() == R.id.save) {
 
         } else if(item.getItemId() == R.id.cancel) {
-
+            this.finish();
         }
         return super.onOptionsItemSelected(item);
     }

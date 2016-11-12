@@ -1,19 +1,15 @@
 package in.devmetric.opportunityhackcwdr;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
+import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 
 import in.devmetric.opportunityhackcwdr.Adapters.ViewPagerAdapters;
@@ -37,6 +33,19 @@ public class MainActivity extends BaseActivity {
 
         mainScreenHolder.floatingSearchView = (FloatingSearchView) findViewById(R.id.floating_search_view);
         searchView = mainScreenHolder.floatingSearchView;
+        searchView.setOnSearchListener(new FloatingSearchView.OnSearchListener() {
+            @Override
+            public void onSuggestionClicked(SearchSuggestion searchSuggestion) {
+
+            }
+
+            @Override
+            public void onSearchAction(String currentQuery) {
+                Intent i = new Intent(MainActivity.this, SearchActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                i.putExtra("search", currentQuery);
+                startActivity(i);
+            }
+        });
         mainScreenHolder.viewPager = (ViewPager) findViewById(R.id.view_pager);
         FragmentManager fm = getSupportFragmentManager();
         ViewPagerAdapters adapters = new ViewPagerAdapters(fm);
