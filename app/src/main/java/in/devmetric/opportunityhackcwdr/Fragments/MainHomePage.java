@@ -101,7 +101,7 @@ public class MainHomePage extends Fragment {
 
     private void getContent() {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, AppConfig.SEARCH + "health", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, AppConfig.CONTENTS + "content", new Response.Listener<String>() {
             @Override
             public void onResponse(String response1) {
                 System.out.println(response1 + "");

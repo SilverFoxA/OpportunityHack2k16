@@ -16,9 +16,9 @@ public class Source implements Serializable {
     @SerializedName("title")
     @Expose
     private String title;
-    @SerializedName("tags")
-    @Expose
-    private List<String> tags = new ArrayList<String>();
+//    @SerializedName("tags")
+//    @Expose
+//    private List<String> tags = new ArrayList<String>();
     @SerializedName("data")
     @Expose
     private String data;
@@ -64,18 +64,18 @@ public class Source implements Serializable {
      * @return
      * The tags
      */
-    public List<String> getTags() {
-        return tags;
-    }
+//    public List<String> getTags() {
+//        return tags;
+//    }
 
     /**
      *
      * @param tags
      * The tags
      */
-    public void setTags(List<String> tags) {
-        this.tags = tags;
-    }
+//    public void setTags(List<String> tags) {
+//        this.tags = tags;
+//    }
 
     /**
      *

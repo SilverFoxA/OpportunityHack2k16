@@ -94,7 +94,7 @@ public class BlogPage extends Fragment {
 
     private void getContent() {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, AppConfig.SEARCH + "health", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, AppConfig.CONTENTS + "blog", new Response.Listener<String>() {
             @Override
             public void onResponse(String response1) {
                 System.out.println(response1 + "");
@@ -112,6 +112,6 @@ public class BlogPage extends Fragment {
             }
         });
 
-        AppController.getInstance().addToRequestQueue(stringRequest, "home");
+        AppController.getInstance().addToRequestQueue(stringRequest, "blog");
     }
 }
