@@ -1,7 +1,8 @@
-package in.devmetric.opportunityhackcwdr;
+package in.devmetric.opportunityhackcwdr.Fragments;
+
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,23 +12,36 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class HotlineActivity extends AppCompatActivity {
+import in.devmetric.opportunityhackcwdr.Hotline;
+import in.devmetric.opportunityhackcwdr.MainActivity;
+import in.devmetric.opportunityhackcwdr.R;
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class HotlinesPage extends Fragment {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hotline);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyalerView);
+    public HotlinesPage() {
+    }
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_hotlines_page, container, false);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyalerView);
         recyclerView.setHasFixedSize(true);
-        layoutManager = new  LinearLayoutManager(this);
+        layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         adapter = new HotlineAdapter(getData());
         recyclerView.setAdapter(adapter);
+
+        return view;
     }
 
     ArrayList<Hotline> getData() {
@@ -42,7 +56,7 @@ public class HotlineActivity extends AppCompatActivity {
     }
 
     class HotlineAdapter extends RecyclerView.Adapter
-            <HotlineActivity.HotlineViewHolder> {
+            <HotlineViewHolder> {
 
         ArrayList<Hotline> mDataSet;
 
@@ -61,7 +75,7 @@ public class HotlineActivity extends AppCompatActivity {
             holder.tvName.setText(mDataSet.get(position).getName());
             holder.tvNumber.setText(mDataSet.get(position).getNumber());
             holder.tvLocation.setText(mDataSet.get(position).getLocation());
-            holder.tvInitial.setText(mDataSet.get(position).getName().charAt(0)+"");
+            holder.tvInitial.setText(mDataSet.get(position).getName().charAt(0) + "");
         }
 
         @Override
@@ -73,6 +87,7 @@ public class HotlineActivity extends AppCompatActivity {
     class HotlineViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvName, tvNumber, tvLocation, tvInitial;
+
         public HotlineViewHolder(View itemView) {
             super(itemView);
             tvName = (TextView) itemView.findViewById(R.id.tvName);
@@ -81,4 +96,5 @@ public class HotlineActivity extends AppCompatActivity {
             tvInitial = (TextView) itemView.findViewById(R.id.tvInitial);
         }
     }
+
 }

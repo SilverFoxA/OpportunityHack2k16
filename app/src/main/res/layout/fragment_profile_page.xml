@@ -67,58 +67,58 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Bio:"
-            android:layout_weight=".75"
-            android:textSize="18sp"
-                android:textStyle="normal|bold" />
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Reading, Dancing, Singing, bla vblalajsdfljalskjdflkajsdlfjlaskdjflsjadfljsa;lkfjlsadjfl;kasjdf;ljas;ldfja;slkdfj; "
-                android:layout_weight=".25"
-                android:textSize="16sp" />
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
-        </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#38ACEC"
-            android:layout_margin="10dp" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bio:"
+                    android:layout_weight=".75"
+                    android:textSize="18sp"
+                    android:textStyle="normal|bold" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Reading, Dancing, Singing, bla vblalajsdfljalskjdflkajsdlfjlaskdjflsjadfljsa;lkfjlsadjfl;kasjdf;ljas;ldfja;slkdfj; "
+                    android:layout_weight=".25"
+                    android:textSize="16sp" />
 
-            <TextView
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#38ACEC"
+                android:layout_margin="10dp" />
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Interests:"
-                android:layout_weight=".75"
-                android:textSize="18sp"
-                android:textStyle="normal|bold" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Reading, Dancing, Singing, bla vblalajsdfljalskjdflkajsdlfjlaskdjflsjadfljsa;lkfjlsadjfl;kasjdf;ljas;ldfja;slkdfj; "
-                android:layout_weight=".25"
-                android:textSize="16sp" />
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
-        </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#38ACEC"
-            android:layout_margin="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Interests:"
+                    android:layout_weight=".75"
+                    android:textSize="18sp"
+                    android:textStyle="normal|bold" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Reading, Dancing, Singing, bla vblalajsdfljalskjdflkajsdlfjlaskdjflsjadfljsa;lkfjlsadjfl;kasjdf;ljas;ldfja;slkdfj; "
+                    android:layout_weight=".25"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#38ACEC"
+                android:layout_margin="10dp" />
         </LinearLayout>
     </LinearLayout>
 
