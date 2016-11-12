@@ -1,7 +1,9 @@
 package in.devmetric.opportunityhackcwdr.Fragments;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +17,7 @@ import android.view.ViewGroup;
 import in.devmetric.opportunityhackcwdr.MainActivity;
 import in.devmetric.opportunityhackcwdr.ProfileEditActivity;
 import in.devmetric.opportunityhackcwdr.R;
+import in.devmetric.opportunityhackcwdr.WelcomeActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,8 +50,17 @@ public class ProfilePage extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.edit) {
-            startActivity(new Intent(getContext(), ProfileEditActivity.class));
+        switch (item.getItemId()) {
+            case R.id.edit:
+                startActivity(new Intent(getContext(), ProfileEditActivity.class));
+                break;
+            case R.id.signout:
+                SharedPreferences sharedpreferences = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.clear();
+                editor.commit();
+                startActivity(new Intent(getContext(), WelcomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
