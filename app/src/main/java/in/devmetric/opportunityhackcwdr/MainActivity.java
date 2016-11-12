@@ -53,6 +53,7 @@ public class MainActivity extends BaseActivity {
                 mainScreenHolder.bottomBar.setCurrentItem(position);
                 setPageTitle(position);
                 if (position > 0) {
+                    if (!actionBar.isShowing()) actionBar.show();
                     mainScreenHolder.floatingSearchView.setVisibility(View.GONE);
                 } else mainScreenHolder.floatingSearchView.setVisibility(View.VISIBLE);
             }
