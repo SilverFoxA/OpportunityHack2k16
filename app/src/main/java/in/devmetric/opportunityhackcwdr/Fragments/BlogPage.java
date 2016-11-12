@@ -1,6 +1,7 @@
 package in.devmetric.opportunityhackcwdr.Fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import in.devmetric.opportunityhackcwdr.Adapters.SampleCardAdapter;
+import in.devmetric.opportunityhackcwdr.Add_New_Post;
 import in.devmetric.opportunityhackcwdr.MainActivity;
 import in.devmetric.opportunityhackcwdr.R;
 import in.devmetric.opportunityhackcwdr.ViewHolders.MainFeedHolder;
@@ -55,6 +57,13 @@ public class BlogPage extends Fragment {
                 } else {
                     mainFeedHolder.addLayout.setVisibility(View.VISIBLE);
                 }
+            }
+        });
+
+        mainFeedHolder.addLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), Add_New_Post.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             }
         });
         return view;
