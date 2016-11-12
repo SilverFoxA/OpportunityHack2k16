@@ -1,7 +1,10 @@
 package in.devmetric.opportunityhackcwdr;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -9,5 +12,20 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.profile, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.edit) {
+            startActivity(new Intent(ProfileActivity.this, ProfileEditActivity.class));
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
