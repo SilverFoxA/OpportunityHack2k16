@@ -48,7 +48,8 @@ public class LoginActiviy extends AppCompatActivity
                 }
                 break;
             case R.id.tvForgotPassowrd:
-
+                Intent i = new Intent(LoginActiviy.this, ForgotPasswordActivity.class);
+                startActivity(i);
                 break;
             case R.id.tvRegister:
                 startActivity(new Intent(getApplicationContext(), RegisterActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));

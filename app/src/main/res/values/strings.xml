@@ -10,4 +10,7 @@
     <string name="tab_3">Questions</string>
     <string name="tab_4">Hotlines</string>
     <string name="tab_5">Profile</string>
+    <string name="forgot_password">After entering you User ID and clicking on submit button below you
+            will receive a confirmation email. Follow whe instructions provided
+            in that email to reset your password</string>
 </resources>
