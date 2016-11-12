@@ -27,10 +27,10 @@ public class Source implements Serializable {
     private Boolean published;
     @SerializedName("timeCreated")
     @Expose
-    private Integer timeCreated;
+    private long timeCreated;
     @SerializedName("timeLastUpdated")
     @Expose
-    private Integer timeLastUpdated;
+    private long timeLastUpdated;
     @SerializedName("createdBy")
     @Expose
     private String createdBy;
@@ -118,7 +118,7 @@ public class Source implements Serializable {
      * @return
      * The timeCreated
      */
-    public Integer getTimeCreated() {
+    public long getTimeCreated() {
         return timeCreated;
     }
 
@@ -136,7 +136,7 @@ public class Source implements Serializable {
      * @return
      * The timeLastUpdated
      */
-    public Integer getTimeLastUpdated() {
+    public long getTimeLastUpdated() {
         return timeLastUpdated;
     }
 

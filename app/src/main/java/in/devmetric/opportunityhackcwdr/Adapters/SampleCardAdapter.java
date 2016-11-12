@@ -9,8 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
+import in.devmetric.opportunityhackcwdr.Pojo.SearchPojo;
 import in.devmetric.opportunityhackcwdr.PostDescription;
 import in.devmetric.opportunityhackcwdr.R;
 
@@ -22,10 +24,12 @@ public class SampleCardAdapter extends RecyclerView.Adapter {
 
 
     private final Context mContext;
+    private final ArrayList<SearchPojo> searchPojos;
     private HashSet list;
 
-    public SampleCardAdapter(Context mContext) {
+    public SampleCardAdapter(Context mContext, ArrayList<SearchPojo> searchPojos) {
         this.mContext = mContext;
+        this.searchPojos = searchPojos;
     }
 
 
@@ -46,18 +50,18 @@ public class SampleCardAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int pos) {
-        new SampleFeedHolder(holder.itemView).bindData(mContext);
+        new SampleFeedHolder(holder.itemView).bindData(mContext, searchPojos.get(pos));
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return searchPojos.size();
     }
 
     private class SampleFeedHolder extends RecyclerView.ViewHolder {
 
         private ImageView wallpaper, imgFrwd;
-        private TextView postTitle, postDescription;
+        private TextView postTitle, postDescription, userName;
 
         SampleFeedHolder(View itemView) {
             super(itemView);
@@ -66,10 +70,11 @@ public class SampleCardAdapter extends RecyclerView.Adapter {
             postTitle = (TextView) itemView.findViewById(R.id.postTitle);
             postDescription = (TextView) itemView.findViewById(R.id.txtDescription);
             imgFrwd = (ImageView) itemView.findViewById(R.id.share);
+            userName = (TextView) itemView.findViewById(R.id.userName);
         }
 
 
-        public void bindData(final Context mContext) {//perform operations here
+        public void bindData(final Context mContext, SearchPojo searchPojo) {//perform operations here
             wallpaper.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -99,6 +104,9 @@ public class SampleCardAdapter extends RecyclerView.Adapter {
                 }
             });
 
+            postTitle.setText(searchPojo.getSource().getTitle() + "");
+            postDescription.setText(searchPojo.getSource().getData() + "");
+            userName.setText(searchPojo.getSource().getCreatedBy() + "");
         }
 
         private void mCommon() {
