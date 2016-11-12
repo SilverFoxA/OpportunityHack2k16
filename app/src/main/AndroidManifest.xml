@@ -30,6 +30,10 @@
         </activity>
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".ResetPasswordActivity" />
+        <activity
+            android:name=".PostDescription"
+            android:label="@string/title_activity_post_description"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
