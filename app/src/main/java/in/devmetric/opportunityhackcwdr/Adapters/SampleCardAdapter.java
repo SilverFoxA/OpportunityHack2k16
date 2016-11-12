@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import in.devmetric.opportunityhackcwdr.PostDescription;
 import in.devmetric.opportunityhackcwdr.R;
 
 /**
@@ -35,10 +36,11 @@ import in.devmetric.opportunityhackcwdr.R;
 public class SampleCardAdapter extends RecyclerView.Adapter {
 
 
+    private final Context mContext;
     private HashSet list;
 
     public SampleCardAdapter(Context mContext) {
-
+        this.mContext = mContext;
     }
 
 
@@ -59,7 +61,7 @@ public class SampleCardAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int pos) {
-        new SampleFeedHolder(holder.itemView).bindData();
+        new SampleFeedHolder(holder.itemView).bindData(mContext);
     }
 
     @Override
@@ -69,16 +71,43 @@ public class SampleCardAdapter extends RecyclerView.Adapter {
 
     private class SampleFeedHolder extends RecyclerView.ViewHolder {
 
+        private ImageView wallpaper;
+        private TextView postTitle, postDescription;
 
         SampleFeedHolder(View itemView) {
             super(itemView);
             //initialise variables
-
+            wallpaper = (ImageView) itemView.findViewById(R.id.wallpaper);
+            postTitle = (TextView) itemView.findViewById(R.id.postTitle);
+            postDescription = (TextView) itemView.findViewById(R.id.txtDescription);
         }
 
 
-        public void bindData() {//perform operations here
+        public void bindData(final Context mContext) {//perform operations here
+            wallpaper.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mCommon();
+                }
+            });
+            postTitle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mCommon();
+                }
+            });
+            postDescription.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mCommon();
+                }
+            });
 
+
+        }
+
+        private void mCommon() {
+            mContext.startActivity(new Intent(mContext, PostDescription.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
         }
 
     }
