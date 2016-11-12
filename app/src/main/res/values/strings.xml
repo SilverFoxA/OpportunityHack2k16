@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">OpportunityHack CWDR</string>
+    <string name="forgot_password">After entering you User ID and clicking on submit button below you
+            will receive a confirmation email. Follow whe instructions provided
+            in that email to reset your password</string>
 </resources>

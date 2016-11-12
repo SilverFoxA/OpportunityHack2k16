@@ -1,5 +1,6 @@
 package in.devmetric.opportunityhackcwdr;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -46,7 +47,8 @@ public class LoginActiviy extends AppCompatActivity
                 }
                 break;
             case R.id.tvForgotPassowrd:
-
+                Intent i = new Intent(LoginActiviy.this, ForgotPasswordActivity.class);
+                startActivity(i);
                 break;
             case R.id.tvRegister:
 
