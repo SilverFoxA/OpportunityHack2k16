@@ -1,5 +1,6 @@
 package in.devmetric.opportunityhackcwdr;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class LoginActiviy extends AppCompatActivity
-            implements View.OnClickListener{
+        implements View.OnClickListener {
 
     private Button bLogin;
     private EditText etEmail, etPassword;
@@ -38,8 +39,9 @@ public class LoginActiviy extends AppCompatActivity
             case R.id.bLogin:
                 String email = etEmail.getText().toString();
                 String password = etPassword.getText().toString();
-                if(email.equals("satyam@gmail.com") && password.equals("danydude")) {
+                if (email.equals("satyam@gmail.com") && password.equals("danydude")) {
                     Toast.makeText(LoginActiviy.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 } else {
                     tvInvalid.setVisibility(View.VISIBLE);
                     tvForgotPssword.setVisibility(View.VISIBLE);
