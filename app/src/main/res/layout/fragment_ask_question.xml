@@ -19,7 +19,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
         android:id="@+id/editText3"
-        android:hint="Question" />
+        android:hint="Question"
+        style="@style/Base.DialogWindowTitle.AppCompat" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -38,21 +39,38 @@
         android:layout_height="wrap_content"
         android:text="Submit"
         android:id="@+id/button"
-        android:layout_below="@+id/editText4"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="67dp" />
+        android:layout_marginBottom="42dp" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/editText4"
-        android:lines="3"
-        android:hint="Describe the question"
-        android:gravity="center"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/editText2"
+        android:layout_above="@+id/button"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="@dimen/abc_action_bar_overflow_padding_end_material"
+        android:background="@drawable/border"
+        android:padding="10dp"
+        >
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/editText4"
+            android:lines="3"
+            android:hint="Describe the question"
+            android:gravity="center"
+            android:layout_below="@+id/editText2"
+            android:layout_above="@+id/button"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </LinearLayout>
 
 </RelativeLayout>
 
