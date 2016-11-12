@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import in.devmetric.opportunityhackcwdr.MainActivity;
 import in.devmetric.opportunityhackcwdr.R;
 
 /**
@@ -16,7 +17,6 @@ public class HotlinesPage extends Fragment {
 
 
     public HotlinesPage() {
-        // Required empty public constructor
     }
 
 
@@ -26,5 +26,6 @@ public class HotlinesPage extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_hotlines_page, container, false);
     }
+
 
 }

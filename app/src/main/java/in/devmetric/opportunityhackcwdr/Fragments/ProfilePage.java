@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import in.devmetric.opportunityhackcwdr.MainActivity;
 import in.devmetric.opportunityhackcwdr.R;
 
 /**
@@ -16,7 +17,6 @@ public class ProfilePage extends Fragment {
 
 
     public ProfilePage() {
-        // Required empty public constructor
     }
 
 

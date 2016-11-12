@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import in.devmetric.opportunityhackcwdr.Adapters.SampleCardAdapter;
+import in.devmetric.opportunityhackcwdr.BaseFrame.BaseActivity;
+import in.devmetric.opportunityhackcwdr.MainActivity;
 import in.devmetric.opportunityhackcwdr.R;
 import in.devmetric.opportunityhackcwdr.ViewHolders.MainFeedHolder;
 
@@ -43,6 +45,35 @@ public class MainHomePage extends Fragment {
         SampleCardAdapter adapter = new SampleCardAdapter(getContext());
         mainFeedHolder.recyclerView.setAdapter(adapter);
 
+        mainFeedHolder.recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            boolean isScrolling = false;
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                System.out.println("Here==>" + newState);
+                switch (newState) {
+                    case 0:
+                        isScrolling = true;
+                        break;
+                    case 1:
+                        isScrolling = true;
+                        break;
+                    case 2:
+                    default:
+                        isScrolling = true;
+                        break;
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0 && isScrolling) {
+                    MainActivity.actionBar.hide();
+                } else MainActivity.actionBar.show();
+            }
+        });
         return view;
     }
 

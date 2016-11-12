@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import in.devmetric.opportunityhackcwdr.MainActivity;
 import in.devmetric.opportunityhackcwdr.R;
 
 /**
@@ -14,10 +15,6 @@ import in.devmetric.opportunityhackcwdr.R;
  */
 public class QuestionsPage extends Fragment {
 
-
-    public QuestionsPage() {
-        // Required empty public constructor
-    }
 
 
     @Override

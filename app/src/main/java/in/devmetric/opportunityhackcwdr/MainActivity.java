@@ -6,16 +6,23 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
+import com.arlib.floatingsearchview.FloatingSearchView;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 
 import in.devmetric.opportunityhackcwdr.Adapters.ViewPagerAdapters;
 import in.devmetric.opportunityhackcwdr.BaseFrame.BaseActivity;
 
 public class MainActivity extends BaseActivity {
+
+    public static ActionBar actionBar;
+    public static FloatingSearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +32,11 @@ public class MainActivity extends BaseActivity {
         setSupportActionBar(toolbar);
 
         initFrame();
+
+        actionBar = getSupportActionBar();
+
+        mainScreenHolder.floatingSearchView = (FloatingSearchView) findViewById(R.id.floating_search_view);
+        searchView = mainScreenHolder.floatingSearchView;
         mainScreenHolder.viewPager = (ViewPager) findViewById(R.id.view_pager);
         FragmentManager fm = getSupportFragmentManager();
         ViewPagerAdapters adapters = new ViewPagerAdapters(fm);
@@ -40,6 +52,9 @@ public class MainActivity extends BaseActivity {
             public void onPageSelected(int position) {
                 mainScreenHolder.bottomBar.setCurrentItem(position);
                 setPageTitle(position);
+                if (position > 0) {
+                    mainScreenHolder.floatingSearchView.setVisibility(View.GONE);
+                } else mainScreenHolder.floatingSearchView.setVisibility(View.VISIBLE);
             }
 
             @Override

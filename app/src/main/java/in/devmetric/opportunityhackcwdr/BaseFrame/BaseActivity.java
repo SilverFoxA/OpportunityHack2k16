@@ -21,6 +21,7 @@ public class BaseActivity extends AppCompatActivity {
 
     protected void initFrame() {
         mainScreenHolder = new MainScreenHolder();
+
         //toolbar
         mainScreenHolder.toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mainScreenHolder.toolbar);
@@ -47,7 +48,8 @@ public class BaseActivity extends AppCompatActivity {
         mainScreenHolder.bottomBar.addItem(item4);
         mainScreenHolder.bottomBar.addItem(item5);
 
-
+        //disable the transition
+        mainScreenHolder.bottomBar.setBehaviorTranslationEnabled(false);
         // Change colors
         mainScreenHolder.bottomBar.setAccentColor(getResources().getColor(R.color.colorAccent));
         mainScreenHolder.bottomBar.setInactiveColor(Color.parseColor("#747474"));
@@ -90,5 +92,12 @@ public class BaseActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void hideToolbar(boolean value) {
+        if (getSupportActionBar() != null)
+            if (value)
+                getSupportActionBar().hide();
+            else getSupportActionBar().show();
     }
 }
