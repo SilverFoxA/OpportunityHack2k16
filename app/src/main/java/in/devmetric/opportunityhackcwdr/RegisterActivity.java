@@ -16,6 +16,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText contact;
     private EditText email;
     private CheckBox agree;
+    private EditText password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,13 +26,14 @@ public class RegisterActivity extends AppCompatActivity {
         email = (EditText)findViewById(R.id.email);
         contact = (EditText)findViewById(R.id.contact);
         agree = (CheckBox)findViewById(R.id.agree);
+        password = (EditText)findViewById(R.id.password1);
             register.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Toast toast ;
                     toast = Toast.makeText(RegisterActivity.this,"",Toast.LENGTH_LONG);
                     Boolean flag = false;
-                    if(name.getText().length() > 0&&contact.getText().length() > 0&&email.getText().length() > 0){
+                    if(name.getText().length() > 0&&contact.getText().length() > 0&&email.getText().length() > 0&&password.getText().length() >0){
                         flag = true;
                     }
                     else {

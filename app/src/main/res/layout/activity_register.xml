@@ -52,6 +52,7 @@
             android:ems="10"
             android:id="@+id/email"
             android:hint="email" />
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,10 +60,20 @@
             android:ems="10"
             android:id="@+id/contact"
             android:hint="Contact" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/password1"
+            android:layout_gravity="center_horizontal"
+            android:hint="Password" />
+
         <CheckBox
             android:layout_width="175dp"
             android:layout_height="wrap_content"
-            android:text="I accept to the T&amp;C "
+            android:text="I accept the T&amp;C "
             android:id="@+id/agree"
             android:checked="false"
             />
