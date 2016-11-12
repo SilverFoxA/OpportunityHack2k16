@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +18,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
 
@@ -60,45 +62,35 @@ public class LoginActiviy extends AppCompatActivity
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bLogin:
-                final String email = etEmail.getText().toString();
-                final String password = etPassword.getText().toString();
-
+                final String email = etEmail.getText().toString().trim();
+                final String password = etPassword.getText().toString().trim();
+                Log.d("PARAMS", email + "--" + password);
                 if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
-                    JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, AppConfig.LOGIN, new Response.Listener<JSONArray>() {
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.LOGIN, new Response.Listener<String>() {
                         @Override
-                        public void onResponse(JSONArray response) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    editor.putBoolean("logged", true);
-                                    editor.commit();
-                                    startActivity(new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                                }
-                            });
+                        public void onResponse(String response) {
+                            editor.putBoolean("logged", true);
+                            editor.commit();
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                         }
                     }, new Response.ErrorListener() {
                         @Override
-                        public void onErrorResponse(final VolleyError error) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(LoginActiviy.this, error.getLocalizedMessage() + "Unable to process your request. Please re-check the details", Toast.LENGTH_SHORT).show();
-                                    tvInvalid.setVisibility(View.VISIBLE);
-                                    tvForgotPssword.setVisibility(View.VISIBLE);
-                                }
-                            });
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(LoginActiviy.this, error.getLocalizedMessage() + "Unable to process your request. Please re-check the details", Toast.LENGTH_SHORT).show();
+                            tvInvalid.setVisibility(View.VISIBLE);
+                            tvForgotPssword.setVisibility(View.VISIBLE);
                         }
                     }) {
                         @Override
                         protected Map<String, String> getParams() throws AuthFailureError {
                             HashMap<String, String> map = new HashMap<>();
-                            map.put("userName", email);
+                            map.put("email", email);
                             map.put("password", password);
                             return map;
                         }
                     };
 
-                    AppController.getInstance().addToRequestQueue(jsonArrayRequest, TAG);
+                    AppController.getInstance().addToRequestQueue(stringRequest, TAG);
                 } else {
                     Toast.makeText(this, "Please enter the details", Toast.LENGTH_SHORT).show();
                 }
@@ -111,10 +103,5 @@ public class LoginActiviy extends AppCompatActivity
                 startActivity(new Intent(getApplicationContext(), RegisterActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 break;
         }
-    }
-
-    private boolean isLoggedIn(String email, String password) {
-
-        return false;
     }
 }
