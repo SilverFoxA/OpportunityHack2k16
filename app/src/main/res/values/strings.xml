@@ -13,4 +13,5 @@
     <string name="forgot_password">After entering you User ID and clicking on submit button below you
             will receive a confirmation email. Follow whe instructions provided
             in that email to reset your password</string>
+    <string name="title_activity_add__new__post">Add a Post</string>
 </resources>

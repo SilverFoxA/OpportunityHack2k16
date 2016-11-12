@@ -7,9 +7,9 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,38 +30,40 @@
                     android:layout_centerVertical="true"
                     android:text="S"
                     android:textColor="@color/light"
-                    android:textSize="70dp" />
+                    android:textSize="50dp" />
             </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:paddingLeft="20dp"
-                android:paddingRight="10dp">
+                android:paddingRight="10dp"
+                android:paddingTop="10dp">
 
                 <TextView
                     android:id="@+id/tvName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Satyam"
-                    android:textSize="17sp" />
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="#000" />
 
                 <TextView
                     android:id="@+id/tvNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:text="1-800-432-3913"
-                    android:textSize="17sp" />
+                    android:textAppearance="?android:textAppearanceSmall"
+                    android:textColor="@color/colorAccent" />
 
                 <TextView
                     android:id="@+id/tvLocation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Bangalore"
-                    android:textSize="17sp" />
+                    android:textAppearance="?android:textAppearanceSmall" />
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
