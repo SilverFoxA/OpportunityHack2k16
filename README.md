@@ -2,6 +2,7 @@
 This repo is for the event **<a href="https://opportunity-hack-2016-chennai.devpost.com/?ref_content=default&ref_feature=challenge&ref_medium=portfolio" target="_blank" 
 title="Opportunity Hack">Opportunity Hack</a>** at **PayPal, Chennai**.
 
+<pre>
 MIT License
 
 Copyright (c) 2016 DevMetric Team [Abhijit, Kiran, Parth, Shashank, Satyam &
@@ -24,3 +25,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+</pre>
