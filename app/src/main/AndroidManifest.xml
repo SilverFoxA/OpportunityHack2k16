@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="in.devmetric.opportunityhackcwdr">
 
-
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".AppController"
         android:allowBackup="true"
@@ -42,11 +42,13 @@
         <activity
             android:name=".PostDescription"
             android:label="@string/title_activity_post_description"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Add_New_Post"
             android:label="@string/title_activity_add__new__post"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".SearchActivity"
+            android:label="Search Results"></activity>
     </application>
 
 </manifest>
