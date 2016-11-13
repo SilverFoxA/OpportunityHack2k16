@@ -62,7 +62,7 @@ public class BlogPage extends Fragment {
 
 //        getContent();
         //adapter
-        adapter = new SampleCardAdapter(getContext(), searchPojos);
+        adapter = new SampleCardAdapter(getContext(), searchPojos,"blog");
         mainFeedHolder.recyclerView.setAdapter(adapter);
 
 

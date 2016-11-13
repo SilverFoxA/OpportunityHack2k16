@@ -128,6 +128,12 @@
                     android:layout_height="wrap_content"
                     android:gravity="right|center_vertical">
 
+                    <TextView
+                        android:id="@+id/likeCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp" />
+
                     <ImageView
                         android:id="@+id/like"
                         android:layout_width="30dp"
@@ -135,6 +141,7 @@
                         android:layout_marginRight="20dp"
                         android:padding="5dp"
                         android:src="@drawable/like" />
+
 
                     <ImageView
                         android:id="@+id/share"

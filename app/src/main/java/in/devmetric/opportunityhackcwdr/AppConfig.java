@@ -13,4 +13,5 @@ public class AppConfig {
     public static final String SEARCH = BASE_URL + "search?searchText=";
     public static final String CONTENTS = BASE_URL + "search?type=";
     public static final String QUESTION = BASE_URL + "content";
+    public static final String CONTACTS = BASE_URL + "contacts";
 }

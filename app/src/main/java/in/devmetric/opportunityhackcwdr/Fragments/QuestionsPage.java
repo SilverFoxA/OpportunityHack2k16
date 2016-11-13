@@ -59,7 +59,7 @@ public class QuestionsPage extends Fragment {
 
         getContent();
         //adapter
-        adapter = new SampleCardAdapter(getContext(), searchPojos);
+        adapter = new SampleCardAdapter(getContext(), searchPojos,"question");
         recyclerView.setAdapter(adapter);
 
 

@@ -50,7 +50,7 @@ public class SearchActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         getSearchPojo();
-        adapter = new SampleCardAdapter(SearchActivity.this, searchPojos);
+        adapter = new SampleCardAdapter(SearchActivity.this, searchPojos,"search");
         recyclerView.setAdapter(adapter);
     }
 

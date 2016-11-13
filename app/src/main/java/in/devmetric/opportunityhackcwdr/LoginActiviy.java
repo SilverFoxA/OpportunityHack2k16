@@ -97,6 +97,7 @@ public class LoginActiviy extends AppCompatActivity
                                     editor.putBoolean("logged", true);
                                     editor.commit();
                                     startActivity(new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                    finish();
                                 }
                             } catch (JsonSyntaxException e) {
                                 e.printStackTrace();
