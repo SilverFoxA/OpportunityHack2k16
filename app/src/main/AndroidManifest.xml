@@ -53,10 +53,13 @@
             android:name=".AskQuestionActivity"
             android:label="@string/title_activity_ask_question"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".SearchActivity"
             android:label="Search Results" />
+        <activity
+            android:name=".AnswerActivity"
+            android:label="@string/title_activity_answer"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
