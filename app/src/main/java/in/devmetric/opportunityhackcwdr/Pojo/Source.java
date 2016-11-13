@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Satyam on 13/11/2016.
@@ -39,7 +38,7 @@ public class Source implements Serializable {
     private String lastUpdatedBy;
     @SerializedName("comments")
     @Expose
-    private List<Object> comments = new ArrayList<Object>();
+    private ArrayList<String> comments = new ArrayList<String>();
 
     public String getUrl() {
         return url;
@@ -201,7 +200,7 @@ public class Source implements Serializable {
      * @return
      * The comments
      */
-    public List<Object> getComments() {
+    public ArrayList<String> getComments() {
         return comments;
     }
 
@@ -210,7 +209,7 @@ public class Source implements Serializable {
      * @param comments
      * The comments
      */
-    public void setComments(List<Object> comments) {
+    public void setComments(ArrayList<String> comments) {
         this.comments = comments;
     }
 
