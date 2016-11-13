@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,9 +17,7 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-
-import org.json.JSONArray;
+import com.android.volley.toolbox.StringRequest;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -64,31 +63,34 @@ public class LoginActiviy extends AppCompatActivity
                 final String password = etPassword.getText().toString();
 
                 if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
-                    JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, AppConfig.LOGIN, new Response.Listener<JSONArray>() {
+                    StringRequest jsonArrayRequest = new StringRequest(Request.Method.POST, AppConfig.LOGIN, new Response.Listener<String>() {
                         @Override
-                        public void onResponse(JSONArray response) {
+                        public void onResponse(final String response) {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     editor.putBoolean("logged", true);
                                     editor.commit();
-                                    startActivity(new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                    Log.i(TAG, response);
+                                    if(!response.isEmpty())
+                                        startActivity(new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                                 }
                             });
                         }
                     }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(final VolleyError error) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(LoginActiviy.this, error.getLocalizedMessage() + "Unable to process your request. Please re-check the details", Toast.LENGTH_SHORT).show();
-                                    tvInvalid.setVisibility(View.VISIBLE);
-                                    tvForgotPssword.setVisibility(View.VISIBLE);
-                                }
-                            });
-                        }
-                    }) {
+                            @Override
+                            public void onErrorResponse(final VolleyError error) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(LoginActiviy.this, error.getLocalizedMessage() + "Unable to process your request. Please re-check the details", Toast.LENGTH_SHORT).show();
+                                        Log.e("LoginActivity", error.getLocalizedMessage());
+                                        tvInvalid.setVisibility(View.VISIBLE);
+                                        tvForgotPssword.setVisibility(View.VISIBLE);
+                                    }
+                                });
+                            }
+                        }){
                         @Override
                         protected Map<String, String> getParams() throws AuthFailureError {
                             HashMap<String, String> map = new HashMap<>();
