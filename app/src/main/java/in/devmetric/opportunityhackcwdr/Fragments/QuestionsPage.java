@@ -86,7 +86,11 @@ public class QuestionsPage extends Fragment {
     }
 
     private void getContent() {
-
+        try {
+            searchPojos.clear();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         StringRequest stringRequest = new StringRequest(Request.Method.GET, AppConfig.CONTENTS + "question", new Response.Listener<String>() {
             @Override
             public void onResponse(String response1) {

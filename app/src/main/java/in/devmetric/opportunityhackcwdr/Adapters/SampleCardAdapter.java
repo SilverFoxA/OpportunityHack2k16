@@ -82,7 +82,7 @@ public class SampleCardAdapter extends RecyclerView.Adapter {
     private class SampleFeedHolder extends RecyclerView.ViewHolder {
 
         private ImageView wallpaper, imgFrwd, comment, like;
-        private TextView postTitle, postDescription, userName, likeCount, timestamp;
+        private TextView postTitle, postDescription, userName, likeCount, timestamp, comment_count;
         private VideoView videoView;
         private int hrs;
 
@@ -99,6 +99,7 @@ public class SampleCardAdapter extends RecyclerView.Adapter {
             like = (ImageView) itemView.findViewById(R.id.like);
             likeCount = (TextView) itemView.findViewById(R.id.likeCount);
             timestamp = (TextView) itemView.findViewById(R.id.timeStamp);
+            comment_count = (TextView) itemView.findViewById(R.id.comment_count);
         }
 
 
@@ -113,6 +114,9 @@ public class SampleCardAdapter extends RecyclerView.Adapter {
                 wallpaper.setVisibility(View.GONE);
             }
 
+            if (searchPojo.getSource().getComments() != null && searchPojo.getSource().getComments().size() > 0) {
+                comment_count.setText(searchPojo.getSource().getComments().size() + "");
+            }
             long diff = System.currentTimeMillis() - searchPojo.getSource().getTimeCreated();//as given
 
             long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
@@ -192,7 +196,7 @@ public class SampleCardAdapter extends RecyclerView.Adapter {
             });
 
             postTitle.setText(searchPojo.getSource().getTitle() + "");
-            if (!searchPojo.getSource().getData().startsWith("<img")) {
+            if (searchPojo.getSource().getData() != null && !searchPojo.getSource().getData().startsWith("<img")) {
                 if (page.equals("question"))
                     postDescription.setText(Html.fromHtml(searchPojo.getSource().getDescription()));
                 else

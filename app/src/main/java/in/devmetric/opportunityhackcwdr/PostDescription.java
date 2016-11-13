@@ -28,7 +28,11 @@ public class PostDescription extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
             getSupportActionBar().setTitle(searchPojo.getSource().getTitle() + "");
         }
-        ((TextView) findViewById(R.id.description)).setText(Html.fromHtml(searchPojo.getSource().getData(), new ImageGetter(), new MyTagHandler()));
+        try {
+            ((TextView) findViewById(R.id.description)).setText(Html.fromHtml(searchPojo.getSource().getData(), null, new MyTagHandler()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
