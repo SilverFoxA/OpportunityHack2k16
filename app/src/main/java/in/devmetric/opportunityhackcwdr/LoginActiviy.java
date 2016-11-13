@@ -18,9 +18,12 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import in.devmetric.opportunityhackcwdr.Pojo.UserDetails;
 
 public class LoginActiviy extends AppCompatActivity
         implements View.OnClickListener {
@@ -59,48 +62,50 @@ public class LoginActiviy extends AppCompatActivity
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bLogin:
-                final String email = etEmail.getText().toString();
-                final String password = etPassword.getText().toString();
-
+                final String email = etEmail.getText().toString().trim();
+                final String password = etPassword.getText().toString().trim();
+                Log.d("PARAMS", email + "--" + password);
                 if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
-                    StringRequest jsonArrayRequest = new StringRequest(Request.Method.POST, AppConfig.LOGIN, new Response.Listener<String>() {
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.LOGIN, new Response.Listener<String>() {
                         @Override
-                        public void onResponse(final String response) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    editor.putBoolean("logged", true);
-                                    editor.commit();
-                                    Log.i(TAG, response);
-                                    if(!response.isEmpty())
-                                        startActivity(new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        public void onResponse(String response) {
+                            try {
+                                UserDetails userDetails = new Gson().fromJson(response, UserDetails.class);
+                                editor.putString("email", userDetails.getEmail());
+                                editor.putString("age", userDetails.getAge());
+                                editor.putString("qualification", userDetails.getQualification());
+                                editor.putString("phone", userDetails.getPhone());
+                                StringBuilder sb = new StringBuilder();
+                                for (int x = 0; x < userDetails.getTags().size(); x++) {
+                                    sb.append(userDetails.getTags().get(x));
+                                    if (x < userDetails.getTags().size() - 1)
+                                        sb.append(',');
                                 }
-                            });
+                                editor.putString("tags", sb.toString());
+                            } catch (Exception e) {
+                            }
+                            editor.putBoolean("logged", true);
+                            editor.commit();
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                         }
                     }, new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(final VolleyError error) {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(LoginActiviy.this, error.getLocalizedMessage() + "Unable to process your request. Please re-check the details", Toast.LENGTH_SHORT).show();
-                                        Log.e("LoginActivity", error.getLocalizedMessage());
-                                        tvInvalid.setVisibility(View.VISIBLE);
-                                        tvForgotPssword.setVisibility(View.VISIBLE);
-                                    }
-                                });
-                            }
-                        }){
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(LoginActiviy.this, error.getLocalizedMessage() + "Unable to process your request. Please re-check the details", Toast.LENGTH_SHORT).show();
+                            tvInvalid.setVisibility(View.VISIBLE);
+                            tvForgotPssword.setVisibility(View.VISIBLE);
+                        }
+                    }) {
                         @Override
                         protected Map<String, String> getParams() throws AuthFailureError {
                             HashMap<String, String> map = new HashMap<>();
-                            map.put("userName", email);
+                            map.put("email", email);
                             map.put("password", password);
                             return map;
                         }
                     };
 
-                    AppController.getInstance().addToRequestQueue(jsonArrayRequest, TAG);
+                    AppController.getInstance().addToRequestQueue(stringRequest, TAG);
                 } else {
                     Toast.makeText(this, "Please enter the details", Toast.LENGTH_SHORT).show();
                 }
@@ -113,10 +118,5 @@ public class LoginActiviy extends AppCompatActivity
                 startActivity(new Intent(getApplicationContext(), RegisterActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 break;
         }
-    }
-
-    private boolean isLoggedIn(String email, String password) {
-
-        return false;
     }
 }

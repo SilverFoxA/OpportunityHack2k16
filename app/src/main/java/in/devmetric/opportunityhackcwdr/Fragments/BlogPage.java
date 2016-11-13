@@ -10,10 +10,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
 
 import in.devmetric.opportunityhackcwdr.Adapters.SampleCardAdapter;
 import in.devmetric.opportunityhackcwdr.Add_New_Post;
+import in.devmetric.opportunityhackcwdr.AppConfig;
+import in.devmetric.opportunityhackcwdr.AppController;
 import in.devmetric.opportunityhackcwdr.MainActivity;
+import in.devmetric.opportunityhackcwdr.Pojo.SearchPojo;
 import in.devmetric.opportunityhackcwdr.R;
 import in.devmetric.opportunityhackcwdr.ViewHolders.MainFeedHolder;
 
@@ -23,8 +41,12 @@ import in.devmetric.opportunityhackcwdr.ViewHolders.MainFeedHolder;
 public class BlogPage extends Fragment {
     private MainFeedHolder mainFeedHolder;
 
+    private ArrayList<SearchPojo> searchPojos;
+    private SampleCardAdapter adapter;
+
     public BlogPage() {
         mainFeedHolder = new MainFeedHolder();
+        searchPojos = new ArrayList<>();
     }
 
 
@@ -43,8 +65,9 @@ public class BlogPage extends Fragment {
         mainFeedHolder.recyclerView.setDrawingCacheEnabled(true);
         mainFeedHolder.recyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
 
+        getContent();
         //adapter
-        SampleCardAdapter adapter = new SampleCardAdapter(getContext());
+        adapter = new SampleCardAdapter(getContext(), searchPojos);
         mainFeedHolder.recyclerView.setAdapter(adapter);
 
 
@@ -69,4 +92,26 @@ public class BlogPage extends Fragment {
         return view;
     }
 
+    private void getContent() {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, AppConfig.CONTENTS + "blog", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response1) {
+                System.out.println(response1 + "");
+                JsonArray response = new JsonParser().parse(response1).getAsJsonArray();
+                for (int i = 0; i < response.size(); i++) {
+                    SearchPojo item = new Gson().fromJson(response.get(i).getAsJsonObject().toString(), SearchPojo.class);
+                    searchPojos.add(item);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), error.getLocalizedMessage() + "No result found", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        AppController.getInstance().addToRequestQueue(stringRequest, "blog");
+    }
 }

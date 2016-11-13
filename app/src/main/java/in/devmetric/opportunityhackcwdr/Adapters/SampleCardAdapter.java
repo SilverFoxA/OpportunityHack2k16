@@ -1,31 +1,18 @@
 package in.devmetric.opportunityhackcwdr.Adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
-import android.os.Handler;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 
+import in.devmetric.opportunityhackcwdr.Pojo.SearchPojo;
 import in.devmetric.opportunityhackcwdr.PostDescription;
 import in.devmetric.opportunityhackcwdr.R;
 
@@ -37,10 +24,12 @@ public class SampleCardAdapter extends RecyclerView.Adapter {
 
 
     private final Context mContext;
+    private final ArrayList<SearchPojo> searchPojos;
     private HashSet list;
 
-    public SampleCardAdapter(Context mContext) {
+    public SampleCardAdapter(Context mContext, ArrayList<SearchPojo> searchPojos) {
         this.mContext = mContext;
+        this.searchPojos = searchPojos;
     }
 
 
@@ -61,18 +50,18 @@ public class SampleCardAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int pos) {
-        new SampleFeedHolder(holder.itemView).bindData(mContext);
+        new SampleFeedHolder(holder.itemView).bindData(mContext, searchPojos.get(pos));
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return searchPojos.size();
     }
 
     private class SampleFeedHolder extends RecyclerView.ViewHolder {
 
-        private ImageView wallpaper;
-        private TextView postTitle, postDescription;
+        private ImageView wallpaper, imgFrwd;
+        private TextView postTitle, postDescription, userName;
 
         SampleFeedHolder(View itemView) {
             super(itemView);
@@ -80,10 +69,12 @@ public class SampleCardAdapter extends RecyclerView.Adapter {
             wallpaper = (ImageView) itemView.findViewById(R.id.wallpaper);
             postTitle = (TextView) itemView.findViewById(R.id.postTitle);
             postDescription = (TextView) itemView.findViewById(R.id.txtDescription);
+            imgFrwd = (ImageView) itemView.findViewById(R.id.share);
+            userName = (TextView) itemView.findViewById(R.id.userName);
         }
 
 
-        public void bindData(final Context mContext) {//perform operations here
+        public void bindData(final Context mContext, SearchPojo searchPojo) {//perform operations here
             wallpaper.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -102,8 +93,20 @@ public class SampleCardAdapter extends RecyclerView.Adapter {
                     mCommon();
                 }
             });
+            imgFrwd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent sendIntent = new Intent();
+                    sendIntent.setAction(Intent.ACTION_SEND);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+                    sendIntent.setType("text/plain");
+                    view.getContext().startActivity(Intent.createChooser(sendIntent, "Share the post "));
+                }
+            });
 
-
+            postTitle.setText(searchPojo.getSource().getTitle() + "");
+            postDescription.setText(searchPojo.getSource().getData() + "");
+            userName.setText(searchPojo.getSource().getCreatedBy() + "");
         }
 
         private void mCommon() {

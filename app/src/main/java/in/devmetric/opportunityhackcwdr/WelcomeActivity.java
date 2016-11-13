@@ -1,6 +1,8 @@
 package in.devmetric.opportunityhackcwdr;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -15,6 +17,12 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
+        SharedPreferences sharedpreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        if (sharedpreferences.getBoolean("logged", false)) {
+            //user logged in
+            startActivity(new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+        }
         bSignUp = (Button) findViewById(R.id.bSignUp);
         bSignIn = (Button) findViewById(R.id.bSignIn);
 
