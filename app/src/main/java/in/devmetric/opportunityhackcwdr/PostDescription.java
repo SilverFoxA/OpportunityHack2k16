@@ -5,6 +5,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -26,7 +28,17 @@ public class PostDescription extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
             getSupportActionBar().setTitle(searchPojo.getSource().getTitle() + "");
         }
-        ((TextView) findViewById(R.id.description)).setText(searchPojo.getSource().getData());
+        ((TextView) findViewById(R.id.description)).setText(Html.fromHtml(searchPojo.getSource().getData(), new ImageGetter(), new MyTagHandler()));
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

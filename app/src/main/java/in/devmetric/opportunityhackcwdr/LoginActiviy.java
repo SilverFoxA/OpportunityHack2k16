@@ -20,6 +20,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 
 import org.json.JSONArray;
 
@@ -72,25 +75,35 @@ public class LoginActiviy extends AppCompatActivity
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.LOGIN, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            Log.d("RESPONSE", response + "");
+
+                            JsonObject jsonObject = null;
+
                             try {
-                                UserDetails userDetails = new Gson().fromJson(response, UserDetails.class);
-                                editor.putString("email", userDetails.getEmail());
-                                editor.putString("age", userDetails.getAge());
-                                editor.putString("qualification", userDetails.getQualification());
-                                editor.putString("phone", userDetails.getPhone());
-                                StringBuilder sb = new StringBuilder();
-                                for (int x = 0; x < userDetails.getTags().size(); x++) {
-                                    sb.append(userDetails.getTags().get(x));
-                                    if (x < userDetails.getTags().size() - 1)
-                                        sb.append(',');
+                                jsonObject = new JsonParser().parse(response).getAsJsonObject();
+                                if (!jsonObject.has("error")) {
+                                    Log.d("RESPONSE", response + "");
+                                    try {
+                                        UserDetails userDetails = new Gson().fromJson(response, UserDetails.class);
+                                        editor.putString("email", userDetails.getEmail());
+                                        editor.putString("age", userDetails.getAge());
+                                        editor.putString("qualification", userDetails.getQualification());
+                                        editor.putString("phone", userDetails.getPhone());
+                                        StringBuilder sb = new StringBuilder();
+                                        for (int x = 0; x < userDetails.getTags().size(); x++) {
+                                            sb.append(userDetails.getTags().get(x));
+                                            if (x < userDetails.getTags().size() - 1)
+                                                sb.append(',');
+                                        }
+                                        editor.putString("tags", sb.toString());
+                                    } catch (Exception e) {
+                                    }
+                                    editor.putBoolean("logged", true);
+                                    editor.commit();
+                                    startActivity(new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                                 }
-                                editor.putString("tags", sb.toString());
-                            } catch (Exception e) {
+                            } catch (JsonSyntaxException e) {
+                                e.printStackTrace();
                             }
-                            editor.putBoolean("logged", true);
-                            editor.commit();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                         }
                     }, new Response.ErrorListener() {
                         @Override
