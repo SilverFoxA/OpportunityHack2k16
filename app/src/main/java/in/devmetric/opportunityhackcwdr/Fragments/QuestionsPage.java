@@ -23,11 +23,9 @@ import com.google.gson.JsonParser;
 import java.util.ArrayList;
 
 import in.devmetric.opportunityhackcwdr.Adapters.SampleCardAdapter;
-import in.devmetric.opportunityhackcwdr.Add_New_Post;
 import in.devmetric.opportunityhackcwdr.AppConfig;
 import in.devmetric.opportunityhackcwdr.AppController;
 import in.devmetric.opportunityhackcwdr.AskQuestionActivity;
-import in.devmetric.opportunityhackcwdr.MainActivity;
 import in.devmetric.opportunityhackcwdr.Pojo.SearchPojo;
 import in.devmetric.opportunityhackcwdr.R;
 
