@@ -17,6 +17,7 @@ public class ImageGetter implements Html.ImageGetter {
 
     public Drawable getDrawable(String source) {
         Log.d("Source", source);
+        if (source.startsWith(""))
 //        if (!source.startsWith("http")) source = "http://" + source;
         source.replace("data:image/png;base64,", "");
         byte[] item = Base64.decode(source, Base64.DEFAULT);
@@ -27,4 +28,14 @@ public class ImageGetter implements Html.ImageGetter {
         return drawable;
     }
 
+    public static Drawable drawableFromUrl(String url) throws IOException {
+        Bitmap x;
+
+        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+        connection.connect();
+        InputStream input = connection.getInputStream();
+
+        x = BitmapFactory.decodeStream(input);
+        return new BitmapDrawable(x);
+    }
 };

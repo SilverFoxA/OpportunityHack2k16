@@ -20,6 +20,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import in.devmetric.opportunityhackcwdr.Adapters.SampleCardAdapter;
 import in.devmetric.opportunityhackcwdr.AppConfig;
@@ -108,8 +109,10 @@ public class MainHomePage extends Fragment {
                 for (int i = 0; i < response.size(); i++) {
                     SearchPojo item = new Gson().fromJson(response.get(i).getAsJsonObject().toString(), SearchPojo.class);
                     searchPojos.add(item);
-                    adapter.notifyDataSetChanged();
                 }
+                Collections.reverse(searchPojos);
+                adapter.notifyDataSetChanged();
+
             }
         }, new Response.ErrorListener() {
             @Override

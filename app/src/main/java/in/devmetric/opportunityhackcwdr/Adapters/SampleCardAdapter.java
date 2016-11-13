@@ -22,10 +22,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+import in.devmetric.opportunityhackcwdr.AnswerActivity;
 import in.devmetric.opportunityhackcwdr.AppConfig;
 import in.devmetric.opportunityhackcwdr.AppController;
 import in.devmetric.opportunityhackcwdr.Pojo.SearchPojo;
@@ -79,8 +82,9 @@ public class SampleCardAdapter extends RecyclerView.Adapter {
     private class SampleFeedHolder extends RecyclerView.ViewHolder {
 
         private ImageView wallpaper, imgFrwd, comment, like;
-        private TextView postTitle, postDescription, userName, likeCount;
+        private TextView postTitle, postDescription, userName, likeCount, timestamp;
         private VideoView videoView;
+        private int hrs;
 
         SampleFeedHolder(View itemView) {
             super(itemView);
@@ -94,25 +98,42 @@ public class SampleCardAdapter extends RecyclerView.Adapter {
             comment = (ImageView) itemView.findViewById(R.id.comment);
             like = (ImageView) itemView.findViewById(R.id.like);
             likeCount = (TextView) itemView.findViewById(R.id.likeCount);
+            timestamp = (TextView) itemView.findViewById(R.id.timeStamp);
         }
 
 
-        public void bindData(final Context mContext, final SearchPojo searchPojo, String page) {//perform operations here
+        public void bindData(final Context mContext, final SearchPojo searchPojo, final String page) {//perform operations here
             if (page.equals("question")) {
                 wallpaper.setVisibility(View.GONE);
                 imgFrwd.setVisibility(View.GONE);
                 comment.setVisibility(View.GONE);
                 like.setVisibility(View.GONE);
+                likeCount.setVisibility(View.GONE);
             } else if (page.equals("blog")) {
                 wallpaper.setVisibility(View.GONE);
             }
+
+            long diff = System.currentTimeMillis() - searchPojo.getSource().getTimeCreated();//as given
+
+            long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
+
+            if (minutes > 60) {
+                minutes -= 60;
+                hrs++;
+            }
+            if (hrs > 0) {
+                timestamp.setText(hrs + " hrs ago");
+            } else {
+                timestamp.setText(minutes + " mins ago");
+            }
+
             likeCount.setText(searchPojo.getSource().getLikes() + "");
             like.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     like.setImageResource(R.drawable.like_selected);
                     searchPojo.getSource().setLikes(searchPojo.getSource().getLikes() + 1);
-                    likeCount.setText(searchPojo.getSource().getLikes()+"");
+                    likeCount.setText(searchPojo.getSource().getLikes() + "");
                     StringRequest request = new StringRequest(Request.Method.PUT, AppConfig.QUESTION, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -144,19 +165,19 @@ public class SampleCardAdapter extends RecyclerView.Adapter {
             wallpaper.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mCommon(searchPojo);
+                    mCommon(searchPojo, page);
                 }
             });
             postTitle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mCommon(searchPojo);
+                    mCommon(searchPojo, page);
                 }
             });
             postDescription.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mCommon(searchPojo);
+                    mCommon(searchPojo, page);
                 }
             });
             imgFrwd.setOnClickListener(new View.OnClickListener() {
@@ -171,9 +192,12 @@ public class SampleCardAdapter extends RecyclerView.Adapter {
             });
 
             postTitle.setText(searchPojo.getSource().getTitle() + "");
-            if (!searchPojo.getSource().getData().startsWith("<img"))
-                postDescription.setText(Html.fromHtml(searchPojo.getSource().getData() + ""));
-            else postDescription.setText("See more description");
+            if (!searchPojo.getSource().getData().startsWith("<img")) {
+                if (page.equals("question"))
+                    postDescription.setText(Html.fromHtml(searchPojo.getSource().getDescription()));
+                else
+                    postDescription.setText(Html.fromHtml(searchPojo.getSource().getData() + ""));
+            } else postDescription.setText("See more description");
             userName.setText(searchPojo.getSource().getCreatedBy() + "");
 //            if (searchPojo.getSource().getUrl() != null && !TextUtils.isEmpty(searchPojo.getSource().getUrl())) {
 //                wallpaper.setVisibility(View.GONE);
@@ -188,9 +212,15 @@ public class SampleCardAdapter extends RecyclerView.Adapter {
 //            }
         }
 
-        private void mCommon(SearchPojo searchPojo) {
-            Intent intent = new Intent(mContext, PostDescription.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        private void mCommon(SearchPojo searchPojo, String page) {
+            Intent intent = null;
+            if (page.equals("question")) {
+                intent = new Intent(mContext, AnswerActivity.class);
+
+            } else {
+                intent = new Intent(mContext, PostDescription.class);
+            }
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("value", searchPojo);
             mContext.startActivity(intent);
         }
