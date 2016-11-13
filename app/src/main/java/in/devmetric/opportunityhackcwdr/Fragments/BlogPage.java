@@ -114,4 +114,11 @@ public class BlogPage extends Fragment {
 
         AppController.getInstance().addToRequestQueue(stringRequest, "blog");
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        searchPojos.clear();
+        getContent();
+    }
 }

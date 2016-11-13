@@ -89,6 +89,8 @@
                     android:id="@+id/txtDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="3"
                     android:text="Some dummy text goes here. wo wow wow oww ojjaksdkajshdjasdhaj sdad kjahsjdhadjhasdj ahjsdahsdaadjhsdhajsdgashdjgasdh..."
                     android:textAppearance="?android:textAppearanceSmall"
                     android:textColor="#979797" />
