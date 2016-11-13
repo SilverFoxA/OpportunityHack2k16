@@ -5,32 +5,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    app:layout_collapseParallaxMultiplier="1.0"
     tools:context="in.devmetric.opportunityhackcwdr.AnswerActivity"
-    tools:showIn="@layout/activity_answer"
-    app:layout_collapseParallaxMultiplier="1.0">
+    tools:showIn="@layout/activity_answer">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="bottom"
-        >
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <Button
-            android:layout_width="67dp"
-            android:layout_height="match_parent"
-            android:id="@+id/post"
-            android:text="post"/>
+        <TextView
+            android:id="@+id/QuestionTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="#454545" />
 
-        <EditText
-            android:layout_width="308dp"
-            android:layout_height="52dp"
-            android:layout_alignBottom="@+id/post"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:id="@+id/answer"
-            android:hint="Your Answer"/>
+        <TextView
+            android:id="@+id/QuestionDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="#838282" />
 
-    </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/post"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="post" />
+
+            <EditText
+                android:id="@+id/answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/post"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:hint="Your Answer" />
+        </LinearLayout>
+    </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>
