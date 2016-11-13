@@ -80,23 +80,23 @@ public class SampleCardAdapter extends RecyclerView.Adapter {
         }
 
 
-        public void bindData(final Context mContext, SearchPojo searchPojo) {//perform operations here
+        public void bindData(final Context mContext, final SearchPojo searchPojo) {//perform operations here
             wallpaper.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mCommon();
+                    mCommon(searchPojo);
                 }
             });
             postTitle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mCommon();
+                    mCommon(searchPojo);
                 }
             });
             postDescription.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mCommon();
+                    mCommon(searchPojo);
                 }
             });
             imgFrwd.setOnClickListener(new View.OnClickListener() {
@@ -113,21 +113,24 @@ public class SampleCardAdapter extends RecyclerView.Adapter {
             postTitle.setText(searchPojo.getSource().getTitle() + "");
             postDescription.setText(searchPojo.getSource().getData() + "");
             userName.setText(searchPojo.getSource().getCreatedBy() + "");
-            if (searchPojo.getSource().getUrl() != null && !TextUtils.isEmpty(searchPojo.getSource().getUrl())) {
-                wallpaper.setVisibility(View.GONE);
-                videoView.setVisibility(View.VISIBLE);
-                MediaController mediaController = new MediaController(mContext);
-                mediaController.setAnchorView(videoView);
-                Uri video = Uri.parse(searchPojo.getSource().getUrl());
-                videoView.setMediaController(mediaController);
-                videoView.setVideoURI(video);
-                videoView.requestFocus();
-                videoView.start();
-            }
+//            if (searchPojo.getSource().getUrl() != null && !TextUtils.isEmpty(searchPojo.getSource().getUrl())) {
+//                wallpaper.setVisibility(View.GONE);
+//                videoView.setVisibility(View.VISIBLE);
+//                MediaController mediaController = new MediaController(mContext);
+//                mediaController.setAnchorView(videoView);
+//                Uri video = Uri.parse(searchPojo.getSource().getUrl());
+//                videoView.setMediaController(mediaController);
+//                videoView.setVideoURI(video);
+//                videoView.requestFocus();
+//                videoView.start();
+//            }
         }
 
-        private void mCommon() {
-            mContext.startActivity(new Intent(mContext, PostDescription.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+        private void mCommon(SearchPojo searchPojo) {
+            Intent intent = new Intent(mContext, PostDescription.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("value",searchPojo);
+            mContext.startActivity(intent);
         }
 
     }

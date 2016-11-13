@@ -72,6 +72,7 @@ public class LoginActiviy extends AppCompatActivity
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.LOGIN, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
+                            Log.d("RESPONSE", response + "");
                             try {
                                 UserDetails userDetails = new Gson().fromJson(response, UserDetails.class);
                                 editor.putString("email", userDetails.getEmail());
