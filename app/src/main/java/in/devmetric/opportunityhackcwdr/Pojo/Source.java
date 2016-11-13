@@ -41,6 +41,17 @@ public class Source implements Serializable {
     @Expose
     private List<Object> comments = new ArrayList<Object>();
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @SerializedName("url")
+    @Expose
+    private String url;
     /**
      *
      * @return

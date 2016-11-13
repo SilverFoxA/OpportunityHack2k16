@@ -65,7 +65,7 @@ public class BlogPage extends Fragment {
         mainFeedHolder.recyclerView.setDrawingCacheEnabled(true);
         mainFeedHolder.recyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
 
-        getContent();
+//        getContent();
         //adapter
         adapter = new SampleCardAdapter(getContext(), searchPojos);
         mainFeedHolder.recyclerView.setAdapter(adapter);

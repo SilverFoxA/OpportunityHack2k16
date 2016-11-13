@@ -44,7 +44,7 @@ import jp.wasabeef.richeditor.RichEditor;
 public class Add_New_Post extends AppCompatActivity {
 
     private static final int REQUEST_CODE = 1;
-    private TextInputEditText title, tags;
+    private TextInputEditText title, tags, url;
     private Button submit;
     private SharedPreferences sharedpreferences;
     private SharedPreferences.Editor editor;
@@ -62,6 +62,7 @@ public class Add_New_Post extends AppCompatActivity {
         title = (TextInputEditText) findViewById(R.id.title);
         tags = (TextInputEditText) findViewById(R.id.tags);
         submit = (Button) findViewById(R.id.submit);
+        url = (TextInputEditText) findViewById(R.id.url);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -142,8 +143,6 @@ public class Add_New_Post extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_CODE);
-//                mEditor.insertImage("http://www.1honeywan.com/dachshund/image/7.21/7.21_3_thumb.JPG",
-//                        "dachshund");
             }
         });
 
@@ -182,6 +181,7 @@ public class Add_New_Post extends AppCompatActivity {
                         map.put("content", mEditor.getHtml());
                         map.put("type", "blog");
                         map.put("description", "");
+                        map.put("url", url.getText().toString());
                         Log.d("PARAM", map.toString());
                         return map;
                     }
@@ -218,8 +218,8 @@ public class Add_New_Post extends AppCompatActivity {
                     bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream); //compress to which format you want.
                     final byte[] byte_arr = stream.toByteArray();
                     String encoded = "data:image/png;base64," + Base64.encodeToString(byte_arr, Base64.DEFAULT);
-                    Log.d("BYTE_ARR", "data:image/png;base64," + encoded);
-                    output.append(" ").append("<img id=\"" + "image" + "\" src=\"" + encoded + "\" style=\"width:50%;"+"\"/>");
+                    //Log.d("BYTE_ARR", "data:image/png;base64," + encoded);
+                    output.append(" ").append("<img id=\"" + "image" + "\" src=\"" + encoded + "\" style=\"width:50%;" + "\"/>");
                     mEditor.setHtml(output.toString());
                     Log.d("WHY", mEditor.getHtml());
                 }

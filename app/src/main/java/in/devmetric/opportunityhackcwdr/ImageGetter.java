@@ -14,8 +14,6 @@ import java.net.URL;
 public class ImageGetter implements Html.ImageGetter {
 
     public Drawable getDrawable(String source) {
-        int id;
-
         Drawable d = new BitmapDrawable(getBitmapFromURL(source));
         d.setBounds(0,0,d.getIntrinsicWidth(),d.getIntrinsicHeight());
         return d;

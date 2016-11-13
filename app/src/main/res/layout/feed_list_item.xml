@@ -64,6 +64,12 @@
                     android:layout_height="220dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/wallpaper" />
+
+                <VideoView
+                    android:id="@+id/video"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:visibility="gone" />
             </RelativeLayout>
             <!--Content-->
             <LinearLayout

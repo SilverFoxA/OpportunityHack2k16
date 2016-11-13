@@ -9,7 +9,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
 /**
- * Created by Avi on 17/04/16.
+ * Created by Avi on 12/11/16.
  * This class makes the request and put items in volley queue for processing
  */
 public class AppController extends Application {

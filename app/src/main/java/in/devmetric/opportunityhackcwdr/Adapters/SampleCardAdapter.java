@@ -2,12 +2,16 @@ package in.devmetric.opportunityhackcwdr.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -62,6 +66,7 @@ public class SampleCardAdapter extends RecyclerView.Adapter {
 
         private ImageView wallpaper, imgFrwd;
         private TextView postTitle, postDescription, userName;
+        private VideoView videoView;
 
         SampleFeedHolder(View itemView) {
             super(itemView);
@@ -71,6 +76,7 @@ public class SampleCardAdapter extends RecyclerView.Adapter {
             postDescription = (TextView) itemView.findViewById(R.id.txtDescription);
             imgFrwd = (ImageView) itemView.findViewById(R.id.share);
             userName = (TextView) itemView.findViewById(R.id.userName);
+            videoView = (VideoView) itemView.findViewById(R.id.video);
         }
 
 
@@ -107,6 +113,17 @@ public class SampleCardAdapter extends RecyclerView.Adapter {
             postTitle.setText(searchPojo.getSource().getTitle() + "");
             postDescription.setText(searchPojo.getSource().getData() + "");
             userName.setText(searchPojo.getSource().getCreatedBy() + "");
+            if (searchPojo.getSource().getUrl() != null && !TextUtils.isEmpty(searchPojo.getSource().getUrl())) {
+                wallpaper.setVisibility(View.GONE);
+                videoView.setVisibility(View.VISIBLE);
+                MediaController mediaController = new MediaController(mContext);
+                mediaController.setAnchorView(videoView);
+                Uri video = Uri.parse(searchPojo.getSource().getUrl());
+                videoView.setMediaController(mediaController);
+                videoView.setVideoURI(video);
+                videoView.requestFocus();
+                videoView.start();
+            }
         }
 
         private void mCommon() {
