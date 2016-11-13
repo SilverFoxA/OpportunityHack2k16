@@ -3,9 +3,6 @@ package in.devmetric.opportunityhackcwdr.Pojo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by @silverFoxA on 13/11/16.
  */
@@ -15,6 +12,9 @@ public class UserDetails {
     @SerializedName("fullName")
     @Expose
     private String fullName;
+    @SerializedName("address")
+    @Expose
+    private String address;
     @SerializedName("age")
     @Expose
     private String age;
@@ -27,9 +27,9 @@ public class UserDetails {
     @SerializedName("phone")
     @Expose
     private String phone;
-    @SerializedName("tags")
+    /*@SerializedName("tags")
     @Expose
-    private List<String> tags = new ArrayList<String>();
+    private List<String> tags = new ArrayList<String>();*/
 
     /**
      * @return The fullName
@@ -104,15 +104,24 @@ public class UserDetails {
     /**
      * @return The tags
      */
-    public List<String> getTags() {
+   /* public List<String> getTags() {
         return tags;
     }
 
+
     /**
      * @param tags The tags
-     */
+     *//*
     public void setTags(List<String> tags) {
         this.tags = tags;
+    }*/
+
+
+    public String getAddress() {
+        return address;
     }
 
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }

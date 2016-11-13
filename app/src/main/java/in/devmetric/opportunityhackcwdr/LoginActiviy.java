@@ -71,18 +71,24 @@ public class LoginActiviy extends AppCompatActivity
                         public void onResponse(String response) {
                             try {
                                 UserDetails userDetails = new Gson().fromJson(response, UserDetails.class);
+                                Log.i(TAG, userDetails.getEmail()+"\n"
+                                        +userDetails.getAge()+"\n"
+                                        +userDetails.getQualification()+"\n"
+                                        +userDetails.getPhone()+"\n");
                                 editor.putString("email", userDetails.getEmail());
                                 editor.putString("age", userDetails.getAge());
+                                editor.putString("fullName", userDetails.getFullName());
                                 editor.putString("qualification", userDetails.getQualification());
                                 editor.putString("phone", userDetails.getPhone());
-                                StringBuilder sb = new StringBuilder();
+                                /*StringBuilder sb = new StringBuilder();
                                 for (int x = 0; x < userDetails.getTags().size(); x++) {
                                     sb.append(userDetails.getTags().get(x));
                                     if (x < userDetails.getTags().size() - 1)
                                         sb.append(',');
-                                }
-                                editor.putString("tags", sb.toString());
+                                }*/
+                              //  editor.putString("tags", sb.toString());
                             } catch (Exception e) {
+                                Log.e(TAG, e.getLocalizedMessage());
                             }
                             editor.putBoolean("logged", true);
                             editor.commit();

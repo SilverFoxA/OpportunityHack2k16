@@ -15,14 +15,10 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.util.ArrayList;
 
@@ -30,7 +26,6 @@ import in.devmetric.opportunityhackcwdr.Adapters.SampleCardAdapter;
 import in.devmetric.opportunityhackcwdr.Add_New_Post;
 import in.devmetric.opportunityhackcwdr.AppConfig;
 import in.devmetric.opportunityhackcwdr.AppController;
-import in.devmetric.opportunityhackcwdr.MainActivity;
 import in.devmetric.opportunityhackcwdr.Pojo.SearchPojo;
 import in.devmetric.opportunityhackcwdr.R;
 import in.devmetric.opportunityhackcwdr.ViewHolders.MainFeedHolder;
