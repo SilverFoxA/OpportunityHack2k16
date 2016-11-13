@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import in.devmetric.opportunityhackcwdr.Fragments.ProfilePage;
 
 public class ProfileEditActivity extends AppCompatActivity {
 
@@ -98,6 +99,8 @@ public class ProfileEditActivity extends AppCompatActivity {
             final String sage = etBio.getText().toString();
             final String spreferences = etInterest.getText().toString();
             Toast.makeText(ProfileEditActivity.this, "Saving", Toast.LENGTH_SHORT).show();
+            Intent in = new Intent(ProfileEditActivity.this, ProfilePage.class);
+            startActivity(in);
             StringRequest request = new StringRequest(Request.Method.PUT, AppConfig.USER, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
