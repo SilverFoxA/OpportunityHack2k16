@@ -114,10 +114,6 @@ public class Signup extends AppCompatActivity {
                         };
 
                         AppController.getInstance().addToRequestQueue(request, TAG);
-
-                            /*Intent in = new intent(RegisterActivity.this,MainActivity.class);
-                 startActivity(in);
-                  */
                     }
 
 

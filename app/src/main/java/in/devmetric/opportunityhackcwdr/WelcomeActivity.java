@@ -26,7 +26,7 @@ public class WelcomeActivity extends AppCompatActivity {
         }
         bSignUp = (Button) findViewById(R.id.bSignUp);
         bSignIn = (Button) findViewById(R.id.bSignIn);
-
+        //Signup Button
         bSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -35,7 +35,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
+        //Signin Button
         bSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
